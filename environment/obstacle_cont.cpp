@@ -7,7 +7,7 @@
 //---------------------------------------------------------------------------------------------------------
 void microlife::environment::obstacle_cont::populate()
 {
-	constexpr int rate{RAND_MAX / 100 * 25};
+	constexpr int rate{25};
 	data_.clear();
 	std::srand(std::time(nullptr));
 	for (std::size_t x{0}; x != cfg().field_.width_; ++x)

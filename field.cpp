@@ -19,6 +19,9 @@ void microlife::field::update(render& dest) const
 {
 	for (const auto& ent : data_)
 	{
-		dest.set(ent->x(), ent->y(), ent->color());
+		if (ent)
+		{
+			dest.set(ent->x(), ent->y(), ent->color());
+		}
 	}
 }
