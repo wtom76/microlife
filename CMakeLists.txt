@@ -10,7 +10,15 @@ find_package(SFML
 )
 
 add_executable(microlife
-	main.cpp render.cpp render.h
+	pch.h
+	entity.h
+	config.h config.cpp
+	render.h render.cpp
+	field.h field.cpp
+	population.h population.cpp
+	environment/obstacle.h
+	environment/obstacle_cont.h environment/obstacle_cont.cpp
+	main.cpp
 )
 
 target_link_libraries(microlife

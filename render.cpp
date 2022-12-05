@@ -1,12 +1,15 @@
+#include "pch.h"
 #include "render.h"
+#include "config.h"
 
 //---------------------------------------------------------------------------------------------------------
 microlife::render::render()
-	: window_{std::make_unique<sf::RenderWindow>(sf::VideoMode{width, height}, "microlife")}
+	: width_{cfg().field_.width_}
+	, window_{std::make_unique<sf::RenderWindow>(sf::VideoMode{cfg().field_.width_, cfg().field_.height_}, "microlife")}
 	, texture_{std::make_unique<sf::Texture>()}
-	, buffer_{std::make_unique<buffer_t>()}
+	, buffer_(cfg().field_.width_ * cfg().field_.height_, 0)
 {
-	texture_->create(width, height);
+	texture_->create(cfg().field_.width_, cfg().field_.height_);
 }
 //---------------------------------------------------------------------------------------------------------
 void microlife::render::clear()
@@ -37,8 +40,13 @@ void microlife::render::draw()
 	window_->clear(sf::Color::Black);
 
 	// Update screen
-	texture_->update(reinterpret_cast<unsigned char*>(buffer_->data()));
+	texture_->update(reinterpret_cast<unsigned char*>(buffer_.data()));
 	window_->draw(sf::Sprite{*texture_});
 	// end the current frame
 	window_->display();
+}
+//---------------------------------------------------------------------------------------------------------
+void microlife::render::set(std::size_t x, std::size_t y, rgba_t value) noexcept
+{
+	buffer_[y * width_ + x] = value;
 }
