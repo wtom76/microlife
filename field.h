@@ -25,6 +25,7 @@ namespace microlife
 		field();
 
 		void set(std::size_t x, std::size_t y, entity* ent) noexcept;
+		entity* get(std::size_t x, std::size_t y) const noexcept;
 		void update(render& dest) const;
 	};
 }

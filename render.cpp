@@ -12,6 +12,11 @@ microlife::render::render()
 	texture_->create(cfg().field_.width_, cfg().field_.height_);
 }
 //---------------------------------------------------------------------------------------------------------
+bool microlife::render::is_open() const
+{
+	return window_->isOpen();
+}
+//---------------------------------------------------------------------------------------------------------
 void microlife::render::clear()
 {
 	// clear the window with black color

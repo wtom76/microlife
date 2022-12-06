@@ -26,6 +26,7 @@ namespace microlife
 	public:
 		render();
 
+		bool is_open() const;
 		void clear();
 		void draw();
 

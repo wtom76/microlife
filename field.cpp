@@ -15,6 +15,11 @@ void microlife::field::set(std::size_t x, std::size_t y, entity* ent) noexcept
 	data_[y * width_ + x] = ent;
 }
 //---------------------------------------------------------------------------------------------------------
+microlife::entity* microlife::field::get(std::size_t x, std::size_t y) const noexcept
+{
+	return data_[y * width_ + x];
+}
+//---------------------------------------------------------------------------------------------------------
 void microlife::field::update(render& dest) const
 {
 	for (const auto& ent : data_)

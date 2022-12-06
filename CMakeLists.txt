@@ -15,7 +15,8 @@ add_executable(microlife
 	config.h config.cpp
 	render.h render.cpp
 	field.h field.cpp
-	population.h population.cpp
+	fauna/population.h fauna/population.cpp
+	fauna/creature.h fauna/creature.cpp
 	environment/obstacle.h
 	environment/obstacle_cont.h environment/obstacle_cont.cpp
 	main.cpp

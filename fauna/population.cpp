@@ -1,11 +1,11 @@
 #include "../pch.h"
 #include "../config.h"
 #include "../field.h"
-#include "obstacle_cont.h"
-#include "obstacle.h"
+#include "population.h"
+#include "creature.h"
 
 //---------------------------------------------------------------------------------------------------------
-void microlife::environment::obstacle_cont::populate()
+void microlife::fauna::population::populate(field const& fld)
 {
 	constexpr int rate{1024};
 	data_.clear();
@@ -14,15 +14,15 @@ void microlife::environment::obstacle_cont::populate()
 	{
 		for (std::size_t y{0}; y != cfg().field_.height_; ++y)
 		{
-			if (std::rand() % rate == 0)
+			if (!fld.get(x, y) && std::rand() % rate == 0)
 			{
-				data_.emplace_back(std::make_unique<obstacle>(x, y));
+				data_.emplace_back(std::make_unique<creature>(x, y));
 			}
 		}
 	}
 }
 //---------------------------------------------------------------------------------------------------------
-void microlife::environment::obstacle_cont::update(field& dest) const
+void microlife::fauna::population::update(field& dest) const
 {
 	for (const auto& ent : data_)
 	{
