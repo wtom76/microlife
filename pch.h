@@ -6,6 +6,8 @@
 #include <iostream>
 #include <thread>
 #include <future>
+#include <algorithm>
+#include <random>
 #include <cstdint>
 #include <cstdlib>
 #include <cassert>

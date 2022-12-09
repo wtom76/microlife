@@ -19,11 +19,12 @@ int main()
 			obst.update(field);
 			microlife::fauna::population population;
 			population.populate(field);
-			population.update(field);
-			field.update(rend);
 			while (rend.is_open())
 			{
+				population.update(field);
+				field.update(rend);
 				rend.draw();
+				population.cycle(field);
 				std::this_thread::sleep_for(1s);	// temp
 			}
 		}

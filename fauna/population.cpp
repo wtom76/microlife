@@ -29,3 +29,21 @@ void microlife::fauna::population::update(field& dest) const
 		dest.set(ent->x(), ent->y(), ent.get());
 	}
 }
+//---------------------------------------------------------------------------------------------------------
+void microlife::fauna::population::cycle(field& fld)
+{
+	buffer_t next;
+	next.reserve(data_.size());
+
+    std::random_device rd;
+	std::shuffle(std::begin(data_), std::end(data_), std::mt19937{rd()});
+
+	for (auto& ent : data_)
+	{
+		if (ent->cycle(fld, next))
+		{
+			next.emplace_back(std::move(ent));
+		}
+	}
+	std::swap(next, data_);
+}
