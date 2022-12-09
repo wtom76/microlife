@@ -21,6 +21,7 @@ void microlife::render::clear()
 {
 	// clear the window with black color
 	window_->clear(sf::Color::Black);
+	std::memset(buffer_.data(), 0, buffer_.size() * sizeof(buffer_t::value_type));
 }
 //---------------------------------------------------------------------------------------------------------
 void microlife::render::draw()

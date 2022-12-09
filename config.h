@@ -15,8 +15,11 @@ namespace microlife
 	public:
 		struct field
 		{
-			static constexpr unsigned int width_{1024};
-			static constexpr unsigned int height_{1024};
+			static constexpr unsigned int width_{256};
+			static constexpr unsigned int height_{256};
+
+			static_assert(width_ > 2);
+			static_assert(height_ > 2);
 		};
 	// data
 	public:

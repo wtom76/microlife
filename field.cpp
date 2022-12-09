@@ -22,6 +22,7 @@ microlife::entity* microlife::field::get(std::size_t x, std::size_t y) const noe
 //---------------------------------------------------------------------------------------------------------
 void microlife::field::update(render& dest) const
 {
+	dest.clear();
 	for (const auto& ent : data_)
 	{
 		if (ent)
