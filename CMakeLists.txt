@@ -30,6 +30,7 @@ find_package(SFML
 
 add_executable(microlife
 	pch.h
+	types.hpp
 	entity.h
 	config.h config.cpp
 	render.h render.cpp
@@ -37,6 +38,7 @@ add_executable(microlife
 	fauna/population.h fauna/population.cpp
 	fauna/creature.h fauna/creature.cpp
 	environment/obstacle.h
+	environment/food.h
 	environment/obstacle_cont.h environment/obstacle_cont.cpp
 	main.cpp
 )

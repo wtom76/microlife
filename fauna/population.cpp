@@ -14,9 +14,9 @@ void microlife::fauna::population::populate(field const& fld)
 	{
 		for (std::size_t y{0}; y != cfg().field_.height_; ++y)
 		{
-			if (!fld.get(x, y) && std::rand() % rate == 0)
+			if (!fld.get({x, y}) && std::rand() % rate == 0)
 			{
-				data_.emplace_back(std::make_unique<creature>(x, y, creature::initial_energy_));
+				data_.emplace_back(std::make_unique<creature>(position{x, y}));
 			}
 		}
 	}
@@ -26,7 +26,7 @@ void microlife::fauna::population::update(field& dest) const
 {
 	for (const auto& ent : data_)
 	{
-		dest.set(ent->x(), ent->y(), ent.get());
+		dest.set(ent->pos(), ent.get());
 	}
 }
 //---------------------------------------------------------------------------------------------------------
@@ -55,6 +55,6 @@ void microlife::fauna::population::cycle(field& fld)
 
 	for (const auto& ent : dead)
 	{
-		fld.set(ent->x(), ent->y(), nullptr);
+		fld.set(ent->pos(), nullptr);
 	}
 }

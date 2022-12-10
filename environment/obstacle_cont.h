@@ -16,10 +16,12 @@ namespace microlife::environment
 	// types
 		using buffer_t = std::vector<std::unique_ptr<entity>>;
 	// data
-		buffer_t data_;
+		buffer_t permanent_;
+		buffer_t expiring_;
 	// methods
 	public:
 		void populate();
-		void update(field& dest) const;
+		void fill(field& dest) const;
+		void cycle(field& dest);
 	};
 }

@@ -19,8 +19,6 @@ bool microlife::render::is_open() const
 //---------------------------------------------------------------------------------------------------------
 void microlife::render::clear()
 {
-	// clear the window with black color
-	window_->clear(sf::Color::Black);
 	std::memset(buffer_.data(), 0, buffer_.size() * sizeof(buffer_t::value_type));
 }
 //---------------------------------------------------------------------------------------------------------
@@ -43,7 +41,7 @@ void microlife::render::draw()
 	}
 
 	// clear the window with black color
-	window_->clear(sf::Color::Black);
+	window_->clear(sf::Color{null_color_});
 
 	// Update screen
 	texture_->update(reinterpret_cast<unsigned char*>(buffer_.data()));
@@ -52,7 +50,7 @@ void microlife::render::draw()
 	window_->display();
 }
 //---------------------------------------------------------------------------------------------------------
-void microlife::render::set(std::size_t x, std::size_t y, rgba_t value) noexcept
+void microlife::render::set(position const& pos, rgba_t value) noexcept
 {
-	buffer_[y * width_ + x] = value;
+	buffer_[pos.field_idx()] = value;
 }

@@ -10,14 +10,14 @@ microlife::field::field()
 	, data_(cfg().field_.width_ * cfg().field_.height_, nullptr)
 {}
 //---------------------------------------------------------------------------------------------------------
-void microlife::field::set(std::size_t x, std::size_t y, entity* ent) noexcept
+void microlife::field::set(position const& pos, entity* ent) noexcept
 {
-	data_[y * width_ + x] = ent;
+	data_[pos.field_idx()] = ent;
 }
 //---------------------------------------------------------------------------------------------------------
-microlife::entity* microlife::field::get(std::size_t x, std::size_t y) const noexcept
+microlife::entity* microlife::field::get(position const& pos) const noexcept
 {
-	return data_[y * width_ + x];
+	return data_[pos.field_idx()];
 }
 //---------------------------------------------------------------------------------------------------------
 void microlife::field::update(render& dest) const
@@ -27,7 +27,7 @@ void microlife::field::update(render& dest) const
 	{
 		if (ent)
 		{
-			dest.set(ent->x(), ent->y(), ent->color());
+			dest.set(ent->pos(), ent->color());
 		}
 	}
 }

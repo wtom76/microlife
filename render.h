@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "types.hpp"
 
 namespace microlife
 {
@@ -16,6 +17,9 @@ namespace microlife
 		using buffer_t = std::vector<rgba_t>;
 
 	// data
+	public:
+		static constexpr rgba_t null_color_{0};
+
 	private:
 		const std::size_t					width_;
 	    std::unique_ptr<sf::RenderWindow>	window_;
@@ -30,6 +34,6 @@ namespace microlife
 		void clear();
 		void draw();
 
-		void set(std::size_t x, std::size_t y, rgba_t value) noexcept;
+		void set(position const& pos, rgba_t value) noexcept;
 	};
 }

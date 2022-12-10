@@ -16,7 +16,7 @@ int main()
 			microlife::field field;
 			microlife::environment::obstacle_cont obst;
 			obst.populate();
-			obst.update(field);
+			obst.fill(field);
 			microlife::fauna::population population;
 			population.populate(field);
 			while (rend.is_open())
@@ -25,7 +25,7 @@ int main()
 				field.update(rend);
 				rend.draw();
 				population.cycle(field);
-				std::this_thread::sleep_for(1s);	// temp
+				std::this_thread::sleep_for(3s);	// temp
 			}
 		}
 	)};

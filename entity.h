@@ -1,5 +1,6 @@
 #pragma once
 #include "render.h"
+#include "types.hpp"
 
 namespace microlife
 {
@@ -10,25 +11,24 @@ namespace microlife
 	//---------------------------------------------------------------------------------------------------------
 	class entity
 	{
-	private:
-		std::size_t x_{0};
-		std::size_t y_{0};
-		const render::rgba_t color_{0};
+	protected:
+		render::rgba_t	color_{0};
+		std::int64_t	energy_{0};
+		position		pos_;
 		
 	protected:
-		entity(render::rgba_t color)
+		entity(render::rgba_t color, std::int64_t energy, position pos)
 			: color_{color}
-		{}
-		entity(std::size_t x, std::size_t y, render::rgba_t color)
-			: x_{x}
-			, y_{y}
-			, color_{color}
+			, energy_{energy}
+			, pos_{pos}
 		{}
 
 	public:
 		virtual ~entity(){}
 		render::rgba_t color() const noexcept { return color_; }
-		std::size_t x() const noexcept { return x_; }
-		std::size_t y() const noexcept { return y_; }
+		std::int64_t energy() const noexcept { return energy_; }
+		const position& pos() const noexcept { return pos_; }
+
+		virtual std::int64_t get_bitten(entity* by) noexcept = 0;
 	};
 }

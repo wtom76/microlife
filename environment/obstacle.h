@@ -7,8 +7,9 @@ namespace microlife::environment
 	{
 		static constexpr render::rgba_t obstacle_color_{0xffffffff};
 	public:
-		obstacle(std::size_t x, std::size_t y)
-			: entity{x, y, obstacle_color_}
+		obstacle(position const& pos)
+			: entity{obstacle_color_, 0, pos}
 		{}
+		std::int64_t get_bitten(entity*) noexcept override { return 0; }
 	};
 }

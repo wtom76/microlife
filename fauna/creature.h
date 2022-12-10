@@ -9,23 +9,27 @@ namespace microlife::fauna
 	class creature : public entity
 	{
 		static constexpr render::rgba_t creature_color_{0xff00ffff};
-	public:
-		static constexpr std::ptrdiff_t initial_energy_{1000ll};	/// creature energy when field is seeded 
-		static constexpr std::ptrdiff_t cycle_energy_{10ll};		/// energy spent every cycle
+
+		static constexpr std::int64_t cycle_energy_{10ll};			/// energy spent every cycle
+		static constexpr std::int64_t bite_energy_taken_{10ll};		/// energy taken from bite
+		static constexpr std::int64_t bite_energy_spent_{5ll};		/// energy spent to bite
+		static constexpr std::int64_t initial_energy_{1000ll};	/// creature energy when field is seeded 
 	// types
 	public:
 		using buffer_t = std::vector<std::unique_ptr<creature>>;
 	// data
-	private:
-		std::ptrdiff_t energy_{0};
 	// methods
 	private:
-		void _check_neighb(std::size_t x, std::size_t y, field& fld, buffer_t& children);
+		void _check_neighb(position const& pos, field& fld, buffer_t& children);
+		void _bite(entity* victim);
 	public:
-		creature(std::size_t x, std::size_t y, std::ptrdiff_t energy)
-			: entity{x, y, creature_color_}
-			, energy_{energy}
+		creature(position const& pos)
+			: entity{creature_color_, initial_energy_, pos}
+		{}
+		creature(std::int64_t energy, position const& pos)
+			: entity{creature_color_, energy, pos}
 		{}
 		bool cycle(field& fld, buffer_t& children);
+		std::int64_t get_bitten(entity* by) noexcept override;
 	};
 }
